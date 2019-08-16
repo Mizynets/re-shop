@@ -19,8 +19,38 @@ thead tr th{
 tbody tr td{
     text-align: center;
     padding: 10px 0;
+    font-size: 1.1rem
 }
 
 .table__tr {
     border-top: 2px solid cadetblue;
 }
+
+.btn{
+    padding: 8px 10px;
+    background: none;
+    border: 1px solid cadetblue;
+    border-radius: 5px;
+    outline: none;
+    transition: .3s;
+}
+.btn:hover{
+    background: rgb(147, 247, 247);
+}
+
+.btn:not(:first-child){
+    margin-left: 5px;
+}
+
+.btn i{
+    font-size: 1.1rem
+}
+.trash{
+    color: red;
+}
+.plus{
+    color: rgb(73, 212, 73);
+}
+.minus{
+    color: rgb(241, 209, 24);
+} 

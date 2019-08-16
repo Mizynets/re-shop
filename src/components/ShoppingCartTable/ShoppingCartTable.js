@@ -24,13 +24,13 @@ const ShoppingCartTable = () => {
                         <td>$40</td>
                         <td>
                             <button className={s.btn}>
-                                <i className={`fa fa-trash-o`}></i>
+                                <i className={`fa fa-trash-o ${s.trash}`}></i>
                             </button>
                             <button className={s.btn}>
-                                <i className={`fa fa-plus-circle`}></i>
+                                <i className={`fa fa-plus-circle ${s.plus}`}></i>
                             </button>
                             <button className={s.btn}>
-                                <i className={`fa fa-minus-circle`}></i>
+                                <i className={`fa fa-minus-circle ${s.minus}`}></i>
                             </button>
                         </td>
                     </tr>
