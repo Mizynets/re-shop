@@ -4,7 +4,7 @@ import './Spinner.module.css';
 const Spinner = _ =>{
     return(
         <div>
-            spinner
+           loading...
         </div>
     )
 };
