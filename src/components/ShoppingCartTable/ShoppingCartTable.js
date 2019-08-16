@@ -37,6 +37,7 @@ const ShoppingCartTable = () => {
                 </tbody>
 
             </table>
+            <h3>Total 200$</h3>
         </div>
     );
 }
