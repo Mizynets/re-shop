@@ -1,0 +1,26 @@
+table, tr, td {
+	border-collapse: collapse;
+    border-spacing: 0;
+	vertical-align: baseline;
+}
+
+.tables{
+    width: 100%;
+}
+
+thead tr th{
+   text-align: center;
+   padding: 10px 0;
+   font-weight: 700;
+   font-size: 1.2rem
+}
+
+
+tbody tr td{
+    text-align: center;
+    padding: 10px 0;
+}
+
+.table__tr {
+    border-top: 2px solid cadetblue;
+}
