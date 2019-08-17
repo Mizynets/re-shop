@@ -3,8 +3,6 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from './components/Pages/HomePage';
 import CartPage from './components/Pages/CartPage';
-import BookList from './components/BookList';
-import WithBookStoreService from './components/hoc';
 import Header from './components/Header';
 
 class App extends Component {

@@ -5,11 +5,11 @@ import s from'./Header.module.css';
 const Header = ({numItems, total}) => {
     return(
         <div className={s.header}>
-            <Link className={s.logo}>ReShop</Link>
-            <span className={s.bucket}>
+            <Link to="/" className={s.logo}>ReShop</Link>
+            <Link to="/cart" className={s.bucket}>
                 <i className={`fa fa-shopping-cart cart-icon ${s.icon}` }></i>
                 {numItems} total ({total})
-            </span>
+            </Link>
         </div>
     );
 }
