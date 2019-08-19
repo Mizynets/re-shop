@@ -50,4 +50,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(ShoppingCartTable);
+export default connect(mapStateToProps)(ShoppingCartTable)
