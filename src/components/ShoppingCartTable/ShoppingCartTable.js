@@ -20,11 +20,7 @@ const ShoppingCartTable = ({items, total, onAddItem, onDecItem, onTrushItem}) =>
                 <tbody>
                     <tr className={s.table__tr}>
                         <td>1</td>
-<<<<<<< HEAD
-                        <td>Site Reliabilitddeering</td>
-=======
-                        <td>Site Reliabilityff Engineering</td>
->>>>>>> ade97b880a7b2f48d2c606bffe9dbc2e7f9e9ffb
+                        <td>Site Reliabilitddgeering</td>
                         <td>2</td>
                         <td>$40</td>
                         <td>
