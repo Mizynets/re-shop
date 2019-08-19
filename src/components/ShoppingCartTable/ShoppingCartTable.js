@@ -1,7 +1,8 @@
 import React from 'react';
 import s from './ShoppingCartTable.module.css';
+import { connect } from 'react-redux';
 
-const ShoppingCartTable = () => {
+const ShoppingCartTable = ({items, total, onAddItem, onDecItem, onTrushItem}) => {
     return(
         <div className={s.ShoppingCartTable}>
             <h2>You Order</h2>
@@ -42,4 +43,11 @@ const ShoppingCartTable = () => {
     );
 }
 
-export default ShoppingCartTable;
+const mapStateToProps = (state) => {
+    return{
+        items: state.cartItems,
+        total: state.orderTotal,
+    }
+}
+
+export default connect(mapStateToProps)(ShoppingCartTable);
