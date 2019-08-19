@@ -7,8 +7,40 @@ const initialState = {
     orderTotal: 210,
 };
 
+const createNewItem = (item, book) => {
+
+    if (item) {
+        return {
+            ...item,
+            count: item.count + 1,
+            total: item.total + book.price,
+        };
+    } else {
+        return {
+            id: book.id,
+            title: book.title,
+            count: 1,
+            total: book.price,
+        };
+    }
+}
+
+const updateCartItems = (cartItems, item, indx) => {
+    if (indx < 0) {
+        return [
+            ...cartItems,
+            item,
+        ]
+    }
+    return [
+        ...cartItems.slice(0, indx),
+        item,
+        ...cartItems.slice(indx + 1),
+    ]
+}
+
 const reducer = (state = initialState, action) => {
-    
+ console.log(action.type);
     switch (action.type) {
 
         case "BOOKS_REQUESTED":
@@ -36,45 +68,70 @@ const reducer = (state = initialState, action) => {
             };
 
         case 'BOOKS_ADD_TO_CART':
-            const bookId = action.payload
-        const book = state.books.find(({id}) => id === bookId);
-        const itemIdx = state.cartItems.findIndex(({id}) => id === bookId);
-        const item = state.cartItems[itemIdx]; 
-        let newItem;
+            const bookId = action.payload;
+            const book = state.books.find(({ id }) => id === bookId);
+            const itemIdx = state.cartItems.findIndex(({ id }) => id === bookId);
+            const item = state.cartItems[itemIdx];
 
-        if(item){
-            newItem =  {
-                ...item,
-                count: item.count + 1,
-                total: item.total + book.price,
-            };
-        } else {
-            newItem =  {
-                id: book.id,
-                title: book.title,
-                count: 1,
-                total: book.price,
-            };
-        }
-        if(itemIdx < 0){
+            const newItem = createNewItem(item, book)
+            return {
+                ...state,
+                cartItems: updateCartItems(state.cartItems, newItem, itemIdx),
+            }
+        
+        case 'BOOK_INC_FROM_CART':
+            const bookI = action.payload;
+            const boo = state.books.find(({id}) => id === bookI);
+            const itemIx = state.cartItems.findIndex(({id}) => id === bookI);
+            const ite = state.cartItems[itemIx];
+
+            let newIncItem = {
+                ...ite,
+                count: ite.count + 1,
+                total: ite.total + boo.price,
+            }
+
             return{
                 ...state,
-                cartItems: [
-                    ...state.cartItems,
-                    newItem,
+                cartItems:[
+                    ...state.cartItems.slice(0, itemIx),
+                    newIncItem,
+                    ...state.cartItems.slice(itemIx + 1),
                 ]
             }
-        } else {
+
+            case 'BOOK_DEC_FROM_CART':
+            const ookI = action.payload;
+            const oo = state.books.find(({id}) => id === ookI);
+            const temIx = state.cartItems.findIndex(({id}) => id === ookI);
+            const te = state.cartItems[temIx];
+
+            let newDecItem = {
+                ...te,
+                count: te.count - 1,
+                total: te.total - oo.price,
+            }
+
             return{
                 ...state,
-                cartItems: [
-                    ...state.cartItems.slice(0, itemIdx),
-                    newItem,
-                    ...state.cartItems.slice(itemIdx + 1),
+                cartItems:[
+                    ...state.cartItems.slice(0, temIx),
+                    newDecItem,
+                    ...state.cartItems.slice(temIx + 1),
                 ]
             }
-        }
-            
+
+            case 'BOOK_DELETE_FROM_CART':
+                    const bookIdd = action.payload;
+                    const itemx = state.cartItems.findIndex(({id}) => id === bookIdd);
+                    return {
+                        ...state,
+                        cartItems: [
+                            ...state.cartItems.slice(0, itemx),
+                            ...state.cartItems.slice(itemx + 1),
+                        ]
+                    }
+
         default: return state;
     }
 }

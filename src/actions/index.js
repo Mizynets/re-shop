@@ -25,9 +25,30 @@ const booksAddToCart = (bookId) => {
     }
 }
 
+const bookIncFromCart = (bookId) => {
+    return {
+        type: "BOOK_INC_FROM_CART",
+        payload: bookId,
+    }
+}
+const bookDecFromCart = (bookId) => {
+    return {
+        type: "BOOK_DEC_FROM_CART",
+        payload: bookId,
+    }
+}
+const bookDeleteFromCart = (bookId) => {
+    return {
+        type: "BOOK_DELETE_FROM_CART",
+        payload: bookId,
+    }
+}
 export {
     booksLoaded,
     booksRequested,
     booksError,
     booksAddToCart,
+    bookIncFromCart,
+    bookDecFromCart,
+    bookDeleteFromCart,
 }
