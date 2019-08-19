@@ -18,8 +18,16 @@ const booksError = (err) => {
     }
 };
 
+const booksAddToCart = (bookId) => {
+    return {
+        type: "BOOKS_ADD_TO_CART",
+        payload: bookId,
+    }
+}
+
 export {
     booksLoaded,
     booksRequested,
     booksError,
+    booksAddToCart,
 }

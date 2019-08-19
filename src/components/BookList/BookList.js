@@ -4,16 +4,16 @@ import s from './BookList.module.css';
 import { connect } from 'react-redux';
 import BookListItem from '../BookListItem';
 import WithBookStoreService from '../hoc/WithBookStoreService';
-import { booksLoaded, booksRequested, booksError } from '../../actions';
+import { booksLoaded, booksRequested, booksError, booksAddToCart } from '../../actions';
 import Spinner from '../Spinner/Spinner';
 import ErrorIndicator from '../ErrorIndicator';
 
-const BookList = ({books}) => {
+const BookList = ({books, addedToCart}) => {
     return (
         <ul className={s.list}>
             {
                 books.map(book => {
-                    return <li key={book.id}><BookListItem books={book} /></li>
+                    return <li key={book.id}><BookListItem books={book} addedToCart={() => addedToCart(book.id)}/></li>
                 })}
         </ul>
     );
@@ -26,7 +26,7 @@ class BookListContainer extends Component {
     }
 
     render() {
-        const { books, loading, error } = this.props;
+        const { books, loading, error, addedToCart} = this.props;
 
         if (loading) {
             return <Spinner />
@@ -36,7 +36,7 @@ class BookListContainer extends Component {
             return <ErrorIndicator />
         }
 
-        return <BookList books={books}/>
+        return <BookList books={books} addedToCart={addedToCart}/>
     }
 }
 
@@ -60,6 +60,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     dispatch(booksLoaded(data));
                 })
                 .catch((error) => { return dispatch(booksError(error)) });
+        },
+        addedToCart: (id) => {
+            dispatch(booksAddToCart(id));
         }
     }
 };
