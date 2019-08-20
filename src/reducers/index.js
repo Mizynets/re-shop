@@ -1,3 +1,5 @@
+import { stat } from "fs";
+
 const initialState = {
     books: [],
     loading: true,
@@ -7,13 +9,13 @@ const initialState = {
     orderTotal: 210,
 };
 
-const createNewItem = (item, book) => {
+const createNewItem = (item, book, quantity) => {
 
     if (item) {
         return {
             ...item,
-            count: item.count + 1,
-            total: item.total + book.price,
+            count: item.count + quantity,
+            total: item.total + book.price*quantity,
         };
     } else {
         return {
@@ -26,6 +28,14 @@ const createNewItem = (item, book) => {
 }
 
 const updateCartItems = (cartItems, item, indx) => {
+
+    if(item.count == 0){
+        return [
+            ...cartItems.slice(0, indx),
+            ...cartItems.slice(indx + 1),
+        ]
+    }
+
     if (indx < 0) {
         return [
             ...cartItems,
@@ -39,8 +49,24 @@ const updateCartItems = (cartItems, item, indx) => {
     ]
 }
 
+const updateOrder = (state, bookId, quantity) => {
+
+    const { books, cartItems } = state
+    
+    const book = books.find(({ id }) => id === bookId);
+    const itemIdx = cartItems.findIndex(({ id }) => id === bookId);
+    const item = cartItems[itemIdx];
+
+    const newItem = createNewItem(item, book, quantity)
+
+    return {
+        ...state,
+        cartItems: updateCartItems(cartItems, newItem, itemIdx),
+    }
+}
+
 const reducer = (state = initialState, action) => {
- console.log(action.type);
+    console.log(action.type);
     switch (action.type) {
 
         case "BOOKS_REQUESTED":
@@ -68,69 +94,17 @@ const reducer = (state = initialState, action) => {
             };
 
         case 'BOOKS_ADD_TO_CART':
-            const bookId = action.payload;
-            const book = state.books.find(({ id }) => id === bookId);
-            const itemIdx = state.cartItems.findIndex(({ id }) => id === bookId);
-            const item = state.cartItems[itemIdx];
+           return updateOrder(state, action.payload, 1);
 
-            const newItem = createNewItem(item, book)
-            return {
-                ...state,
-                cartItems: updateCartItems(state.cartItems, newItem, itemIdx),
-            }
-        
         case 'BOOK_INC_FROM_CART':
-            const bookI = action.payload;
-            const boo = state.books.find(({id}) => id === bookI);
-            const itemIx = state.cartItems.findIndex(({id}) => id === bookI);
-            const ite = state.cartItems[itemIx];
+                return updateOrder(state, action.payload, 1);
 
-            let newIncItem = {
-                ...ite,
-                count: ite.count + 1,
-                total: ite.total + boo.price,
-            }
+        case 'BOOK_DEC_FROM_CART':
+                return updateOrder(state, action.payload, -1);
 
-            return{
-                ...state,
-                cartItems:[
-                    ...state.cartItems.slice(0, itemIx),
-                    newIncItem,
-                    ...state.cartItems.slice(itemIx + 1),
-                ]
-            }
-
-            case 'BOOK_DEC_FROM_CART':
-            const ookI = action.payload;
-            const oo = state.books.find(({id}) => id === ookI);
-            const temIx = state.cartItems.findIndex(({id}) => id === ookI);
-            const te = state.cartItems[temIx];
-
-            let newDecItem = {
-                ...te,
-                count: te.count - 1,
-                total: te.total - oo.price,
-            }
-
-            return{
-                ...state,
-                cartItems:[
-                    ...state.cartItems.slice(0, temIx),
-                    newDecItem,
-                    ...state.cartItems.slice(temIx + 1),
-                ]
-            }
-
-            case 'BOOK_DELETE_FROM_CART':
-                    const bookIdd = action.payload;
-                    const itemx = state.cartItems.findIndex(({id}) => id === bookIdd);
-                    return {
-                        ...state,
-                        cartItems: [
-                            ...state.cartItems.slice(0, itemx),
-                            ...state.cartItems.slice(itemx + 1),
-                        ]
-                    }
+        case 'BOOK_DELETE_FROM_CART':
+            const item = state.cartItems.find(({id}) => id === action.payload)
+                return updateOrder(state, action.payload, -item.count);   
 
         default: return state;
     }
