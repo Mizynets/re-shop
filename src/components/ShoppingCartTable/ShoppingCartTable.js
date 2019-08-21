@@ -11,7 +11,7 @@ const ShoppingCartTable = ({ items, total, onAddItem, onDecItem, onTrushItem }) 
             <td>{++indx}</td>
             <td>{title}</td>
             <td>{count}</td>
-            <td>{total}</td>
+            <td>${total}</td>
 
             <td>
                 <button
@@ -56,15 +56,15 @@ const ShoppingCartTable = ({ items, total, onAddItem, onDecItem, onTrushItem }) 
                 </tbody>
 
             </table>
-            <h3>Total {total}</h3>
+            <h3>Total ${total}</h3>
         </div>
     );
 }
 
 const mapStateToProps = (state) => {
     return {
-        items: state.cartItems,
-        total: state.orderTotal,
+        items: state.shoppingCart.cartItems,
+        total: state.shoppingCart.orderTotal,
     }
 }
 

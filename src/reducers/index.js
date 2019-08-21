@@ -1,12 +1,15 @@
-import { stat } from "fs";
 
 const initialState = {
-    books: [],
-    loading: true,
-    error: null,
-    cartItems: [
-    ],
-    orderTotal: 210,
+    bookList: {
+        books: [],
+        loading: true,
+        error: null,
+    },
+
+    shoppingCart: {
+        cartItems: [],
+        orderTotal: 0,
+    }
 };
 
 const createNewItem = (item, book, quantity) => {
@@ -15,7 +18,7 @@ const createNewItem = (item, book, quantity) => {
         return {
             ...item,
             count: item.count + quantity,
-            total: item.total + book.price*quantity,
+            total: item.total + book.price * quantity,
         };
     } else {
         return {
@@ -29,7 +32,7 @@ const createNewItem = (item, book, quantity) => {
 
 const updateCartItems = (cartItems, item, indx) => {
 
-    if(item.count == 0){
+    if (item.count == 0) {
         return [
             ...cartItems.slice(0, indx),
             ...cartItems.slice(indx + 1),
@@ -51,8 +54,9 @@ const updateCartItems = (cartItems, item, indx) => {
 
 const updateOrder = (state, bookId, quantity) => {
 
-    const { books, cartItems } = state
-    
+    const { books } = state.bookList;
+    const { cartItems } = state.shoppingCart;
+
     const book = books.find(({ id }) => id === bookId);
     const itemIdx = cartItems.findIndex(({ id }) => id === bookId);
     const item = cartItems[itemIdx];
@@ -60,18 +64,16 @@ const updateOrder = (state, bookId, quantity) => {
     const newItem = createNewItem(item, book, quantity)
 
     return {
-        ...state,
+        orderTotal: 0,
         cartItems: updateCartItems(cartItems, newItem, itemIdx),
     }
 }
 
-const reducer = (state = initialState, action) => {
-    console.log(action.type);
-    switch (action.type) {
+const updateBookList = (state, action) => {
 
+    switch (action.type) {
         case "BOOKS_REQUESTED":
             return {
-                ...state,
                 books: [],
                 loading: true,
                 error: null,
@@ -79,7 +81,6 @@ const reducer = (state = initialState, action) => {
 
         case "BOOKS_LOADED":
             return {
-                ...state,
                 books: action.payload,
                 loading: false,
                 error: null,
@@ -87,27 +88,44 @@ const reducer = (state = initialState, action) => {
 
         case "BOOKS_ERROR":
             return {
-                ...state,
                 books: [],
                 loading: false,
                 error: action.payload,
             };
+        
+        default:
+            return state.book;
+    }
+}
 
+const updateShoppingCart = (state, action) => {
+
+    switch (action.type) {
         case 'BOOKS_ADD_TO_CART':
-           return updateOrder(state, action.payload, 1);
+            return updateOrder(state, action.payload, 1);
 
         case 'BOOK_INC_FROM_CART':
-                return updateOrder(state, action.payload, 1);
+            return updateOrder(state, action.payload, 1);
 
         case 'BOOK_DEC_FROM_CART':
-                return updateOrder(state, action.payload, -1);
+            return updateOrder(state, action.payload, -1);
 
         case 'BOOK_DELETE_FROM_CART':
-            const item = state.cartItems.find(({id}) => id === action.payload)
-                return updateOrder(state, action.payload, -item.count);   
-
-        default: return state;
+            const item = state.shoppingCart.cartItems.find(({ id }) => id === action.payload)
+            return updateOrder(state, action.payload, -item.count);
+       
+        default:
+            return state.shoppingCart;
     }
+}
+
+const reducer = (state = initialState, action) => {
+    console.log(action.type);
+
+        return {
+            bookList: updateBookList(state, action),
+            shoppingCart: updateShoppingCart(state, action),
+        }
 }
 
 export default reducer;
