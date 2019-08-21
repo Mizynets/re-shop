@@ -94,7 +94,7 @@ const updateBookList = (state, action) => {
             };
         
         default:
-            return state.book;
+            return state.bookList;
     }
 }
 
