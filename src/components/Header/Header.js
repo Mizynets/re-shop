@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import s from'./Header.module.css';
-
+import { connect } from 'react-redux';
+ 
 const Header = ({numItems, total}) => {
     return(
         <div className={s.header}>
@@ -14,4 +15,11 @@ const Header = ({numItems, total}) => {
     );
 }
 
-export default Header;
+const mapSateToProps = (state) => {
+    return{
+        numItems: state.shoppingCart.cartItems.length,
+        total: state.shoppingCart.orderTotal,
+    }
+}
+
+export default connect(mapSateToProps)(Header);

@@ -10,7 +10,7 @@ class App extends Component {
 
     return (
       <div className="container">
-        <Header numItems={4} total={200} />
+        <Header/>
         <div className="main">
           <Switch>
             <Route path="/" exact component={HomePage} />
