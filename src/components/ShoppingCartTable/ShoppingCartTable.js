@@ -2,8 +2,10 @@ import React from 'react';
 import s from './ShoppingCartTable.module.css';
 import { connect } from 'react-redux';
 import { bookIncFromCart, bookDeleteFromCart, bookDecFromCart } from '../../actions';
+import { bindActionCreators } from 'redux';
 
 const ShoppingCartTable = ({ items, total, onAddItem, onDecItem, onTrushItem }) => {
+
 
     const createTableItem = items.map((item, indx) => {
         const { id, title, count, total } = item;
@@ -70,10 +72,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddItem: (id) => { console.log(id); return dispatch(bookIncFromCart(id))},
+        onAddItem: (id) => dispatch(bookIncFromCart(id)),
         onDecItem: (id) => dispatch(bookDecFromCart(id)),
         onTrushItem: (id) => dispatch(bookDeleteFromCart(id)),
     }
+
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable)
