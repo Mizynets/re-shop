@@ -8,12 +8,16 @@ import { booksLoaded, booksRequested, booksError, booksAddToCart } from '../../a
 import Spinner from '../Spinner/Spinner';
 import ErrorIndicator from '../ErrorIndicator';
 
-const BookList = ({books, addedToCart}) => {
+import BookStoreService from '../../services/BookStoreService';
+
+import { bindActionCreators } from 'C:/Users/aleks/AppData/Local/Microsoft/TypeScript/3.5/node_modules/redux';
+
+const BookList = ({ books, addedToCart }) => {
     return (
         <ul className={s.list}>
             {
                 books.map(book => {
-                    return <li key={book.id}><BookListItem books={book} addedToCart={() => addedToCart(book.id)}/></li>
+                    return <li key={book.id}><BookListItem books={book} addedToCart={() => addedToCart(book.id)} /></li>
                 })}
         </ul>
     );
@@ -22,11 +26,19 @@ const BookList = ({books, addedToCart}) => {
 class BookListContainer extends Component {
 
     componentDidMount() {
-        this.props.fetchBooks();
+
+        const bookStoreService = new BookStoreService();
+        booksRequested();
+        bookStoreService.getData()
+            .then((data) => {
+                booksLoaded(data);
+            })
+            .catch((error) => { return booksError(error) });
+
     }
 
     render() {
-        const { books, loading, error, addedToCart} = this.props;
+        const { books, loading, error, addedToCart } = this.props;
 
         if (loading) {
             return <Spinner />
@@ -36,34 +48,30 @@ class BookListContainer extends Component {
             return <ErrorIndicator />
         }
 
-        return <BookList books={books} addedToCart={addedToCart}/>
+        return <BookList books={books} addedToCart={addedToCart} />
     }
 }
 
 const mapStateToProps = (state) => {
+
     return {
-        books: state.bookList.books,
-        loading: state.bookList.loading,
-        error: state.bookList.error,
+        books: state.reBookList.books,
+        loading: state.reBookList.loading,
+        error: state.reBookListerror,
     }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-
-    const { bookStoreService } = ownProps;
+const mapDispatchToProps = (dispatch) => {
 
     return {
-        fetchBooks: () => {
-            dispatch(booksRequested());
-            bookStoreService.getData()
-                .then((data) => {
-                    dispatch(booksLoaded(data));
-                })
-                .catch((error) => { return dispatch(booksError(error)) });
-        },
+        booksLoaded: bindActionCreators(booksLoaded, dispatch),
+        booksError: bindActionCreators(booksError, dispatch),
+        booksRequested: bindActionCreators(booksRequested, dispatch),
+
         addedToCart: (id) => {
             dispatch(booksAddToCart(id));
-        }
+        },
+
     }
 };
 

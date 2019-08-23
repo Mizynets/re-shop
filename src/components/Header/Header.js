@@ -17,8 +17,8 @@ const Header = ({numItems, total}) => {
 
 const mapSateToProps = (state) => {
     return{
-        numItems: state.shoppingCart.cartItems.length,
-        total: state.shoppingCart.orderTotal,
+        numItems: state.reShoppingCart.cartItems.length,
+        total: state.reShoppingCart.orderTotal,
     }
 }
 

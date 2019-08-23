@@ -1,7 +1,4 @@
-import { resolve } from "url";
-
 class BookStoreService {
-
     data = [
         {
             id: 1,
