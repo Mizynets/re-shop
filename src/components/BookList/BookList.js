@@ -29,6 +29,7 @@ class BookListContainer extends Component {
 
         const bookStoreService = new BookStoreService();
         booksRequested();
+        
         bookStoreService.getData()
             .then((data) => {
                 booksLoaded(data);
@@ -71,7 +72,6 @@ const mapDispatchToProps = (dispatch) => {
         addedToCart: (id) => {
             dispatch(booksAddToCart(id));
         },
-
     }
 };
 

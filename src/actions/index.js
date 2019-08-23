@@ -1,4 +1,5 @@
 const booksLoaded = (newBooks) => {
+    console.log(newBooks);
     return{
         type: 'BOOKS_LOADED',
         payload: newBooks,
@@ -12,6 +13,8 @@ const booksRequested = () => {
 };
 
 const booksError = (err) => {
+    console.log(err)
+
     return {
          type: "BOOKS_ERROR",
          payload: err,
