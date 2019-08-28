@@ -8,7 +8,6 @@ import { booksLoaded, booksRequested, booksError, booksAddToCart } from '../../a
 import Spinner from '../Spinner/Spinner';
 import ErrorIndicator from '../ErrorIndicator';
 
-import BookStoreService from '../../services/BookStoreService';
 import { bindActionCreators } from 'C:/Users/aleks/AppData/Local/Microsoft/TypeScript/3.5/node_modules/redux';
 
 const BookList = ({ books, addedToCart }) => {
@@ -25,10 +24,9 @@ const BookList = ({ books, addedToCart }) => {
 class BookListContainer extends Component {
 
     componentDidMount() {
-
-        const bookStoreService = new BookStoreService();
+       
+        const { bookStoreService, booksLoaded, booksRequested, booksError } = this.props;
         booksRequested();
-        
         bookStoreService.getData()
             .then((data) => {
                 booksLoaded(data);

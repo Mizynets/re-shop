@@ -47,8 +47,8 @@ const updateCartItems = (cartItems, item, indx) => {
 
 const updateOrder = (state, bookId, quantity) => {
 
-    const { books } = state.bookList;
-    const { cartItems } = state.shoppingCart;
+    const { books } = state;
+    const { cartItems } = state;
 
     const book = books.find(({ id }) => id === bookId);
     const itemIdx = cartItems.findIndex(({ id }) => id === bookId);
@@ -76,14 +76,11 @@ const reduxShoppingCart = (state = initialState, action) => {
         case 'BOOKS_ADD_TO_CART':
             return updateOrder(state, action.payload, 1);
 
-        case 'BOOK_INC_FROM_CART':
-            return updateOrder(state, action.payload, 1);
-
         case 'BOOK_DEC_FROM_CART':
             return updateOrder(state, action.payload, -1);
 
         case 'BOOK_DELETE_FROM_CART':
-            const item = state.shoppingCart.cartItems.find(({ id }) => id === action.payload)
+            const item = state.cartItems.find(({ id }) => id === action.payload)
             return updateOrder(state, action.payload, -item.count);
         
         default:

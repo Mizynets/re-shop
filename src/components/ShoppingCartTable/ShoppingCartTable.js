@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './ShoppingCartTable.module.css';
 import { connect } from 'react-redux';
-import { bookIncFromCart, bookDeleteFromCart, bookDecFromCart } from '../../actions';
-import { bindActionCreators } from 'redux';
+import { booksAddToCart, bookDeleteFromCart, bookDecFromCart } from '../../actions';
+
 
 const ShoppingCartTable = ({ items, total, onAddItem, onDecItem, onTrushItem }) => {
 
@@ -71,14 +71,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onAddItem: (id) => dispatch(bookIncFromCart(id)),
-        onDecItem: (id) => dispatch(bookDecFromCart(id)),
-        onTrushItem: (id) => dispatch(bookDeleteFromCart(id)),
+const mapDispatchToProps = {
+        onAddItem: booksAddToCart,
+        onDecItem: bookDecFromCart,
+        onTrushItem: bookDeleteFromCart,
     }
-
-}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable)
