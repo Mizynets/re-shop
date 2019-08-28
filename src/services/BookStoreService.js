@@ -9,7 +9,6 @@ import icon8 from './img/img8.jpg';
 import icon9 from './img/img9.jpg';
 import icon10 from './img/img10.jpg';
 
-
 class BookStoreService {
     data = [
         {
