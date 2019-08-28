@@ -1,7 +1,9 @@
 let initialState = {
-    books: [],
-    loading: true,
-    error: null,
+    bookList: {
+        books: [],
+        loading: true,
+        error: null,
+    }  
 }
 
 const reduxBookList = (state = initialState, action) => {
@@ -30,7 +32,7 @@ const reduxBookList = (state = initialState, action) => {
             };
 
         default:
-            return state;
+            return state.bookList;
     }
 }
 

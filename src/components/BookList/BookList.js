@@ -4,7 +4,7 @@ import s from './BookList.module.css';
 import { connect } from 'react-redux';
 import BookListItem from '../BookListItem';
 import WithBookStoreService from '../hoc/WithBookStoreService';
-import { booksLoaded, booksRequested, booksError, booksAddToCart } from '../../actions';
+import { booksLoaded, booksRequested, booksError, booksAddToCart } from '../../reduxStore/actions';
 import Spinner from '../Spinner/Spinner';
 import ErrorIndicator from '../ErrorIndicator';
 
@@ -51,11 +51,10 @@ class BookListContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-
     return {
-        books: state.reBookList.books,
-        loading: state.reBookList.loading,
-        error: state.reBookListerror,
+        books: state.bookList.books,
+        loading: state.bookList.loading,
+        error: state.bookListerror,
     }
 };
 

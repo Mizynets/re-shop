@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './ShoppingCartTable.module.css';
 import { connect } from 'react-redux';
-import { booksAddToCart, bookDeleteFromCart, bookDecFromCart } from '../../actions';
+import { booksAddToCart, bookDeleteFromCart, bookDecFromCart } from '../../reduxStore/actions';
 
 
 const ShoppingCartTable = ({ items, total, onAddItem, onDecItem, onTrushItem }) => {
@@ -64,10 +64,9 @@ const ShoppingCartTable = ({ items, total, onAddItem, onDecItem, onTrushItem }) 
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
-        items: state.reShoppingCart.cartItems,
-        total: state.reShoppingCart.orderTotal,
+        items: state.shoppingCart.cartItems,
+        total: state.shoppingCart.orderTotal,
     }
 }
 

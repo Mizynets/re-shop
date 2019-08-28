@@ -1,10 +1,10 @@
 import React from 'react';
-import './Spinner.module.css';
+import './Spinner.css';
 
 const Spinner = _ =>{
     return(
-        <div>
-           loading...
+        <div className="spinner">
+          <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </div>
     )
 };

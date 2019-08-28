@@ -3,7 +3,12 @@ import './ErrorIndicator.module.css'
 
 const ErrorIndicator = () => {
     return(
-        <div>Error</div>
+        <div className={classes.Error_Indicator}>
+            <img src={icon} alt="error icon"/>
+            <h3>BOOM!</h3>
+            <p>something was wrong</p>
+            <p>but we already sent droids to fix it</p>
+        </div>
     );
 };
 

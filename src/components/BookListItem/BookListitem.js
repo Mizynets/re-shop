@@ -8,7 +8,7 @@ const BookListitem = ({ books, addedToCart }) => {
     return (
         <div className={s.item}>
             <div className={s.item__img}>
-                <img src={bookImg} alt="book-image"/>
+                <img src={bookImg} alt="books"/>
             </div>
             <div className={s.content}>
                 <div className={s.title}>{title}</div>
