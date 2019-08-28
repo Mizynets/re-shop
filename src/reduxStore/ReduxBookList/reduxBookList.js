@@ -7,7 +7,6 @@ let initialState = {
 }
 
 const reduxBookList = (state = initialState, action) => {
-   
     switch (action.type) {
         
         case "BOOKS_REQUESTED":
