@@ -31,13 +31,13 @@ class BookListContainer extends Component {
             .then((data) => {
                 booksLoaded(data);
             })
-            .catch((error) => { return booksError(error) });
+            .catch((error) => booksError(error));
 
     }
 
     render() {
         const { books, loading, error, addedToCart } = this.props;
-
+        
         if (loading) {
             return <Spinner />
         }
@@ -54,7 +54,7 @@ const mapStateToProps = (state) => {
     return {
         books: state.bookList.books,
         loading: state.bookList.loading,
-        error: state.bookListerror,
+        error: state.bookList.error,
     }
 };
 

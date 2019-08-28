@@ -1,3 +1,7 @@
+import icon1 from './img/img1.jpg';
+import icon2 from './img/img2.jpg';
+
+
 class BookStoreService {
     data = [
         {

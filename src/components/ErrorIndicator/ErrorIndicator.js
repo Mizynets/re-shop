@@ -7,8 +7,7 @@ const ErrorIndicator = () => {
         <div className={s.Error_Indicator}>
             <img src={icon} alt="error icon"/>
             <h3>BOOM!</h3>
-            <p>something was wrong</p>
-            <p>but we already sent droids to fix it</p>
+            <p>Something was wrong</p>
         </div>
     );
 };
