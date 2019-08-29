@@ -59,3 +59,22 @@
         border-radius: 10px;
     }
 }
+
+@media screen and (max-width: 350px){
+
+    .logo{
+        font-size: 1.5rem;
+    }
+    .logo:hover{
+        border-bottom: 1px solid #000;
+    }
+
+    .bucket{
+        padding: 5px;
+        font-size: .8rem;
+        border-radius: 10px;
+    }
+    .icon{
+        font-size: 1.3rem;
+    }
+}

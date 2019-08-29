@@ -84,9 +84,6 @@ transition: .3s;
         .content{
             align-items: center;
         }
-        .content div {
-            padding: 5px;
-        }
         .title{
             margin-top: 10px;
         }
