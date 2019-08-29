@@ -59,7 +59,6 @@ const ShoppingCartTable = ({ items, total, onAddItem, onDecItem, onTrushItem }) 
                         <td colspan="5">Please select a book</td>
                     </tr> : createTableItem}
                 </tbody>
-
             </table>
             <h3>Total ${total}</h3>
         </div>
@@ -78,6 +77,5 @@ const mapDispatchToProps = {
         onDecItem: bookDecFromCart,
         onTrushItem: bookDeleteFromCart,
     }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable)
