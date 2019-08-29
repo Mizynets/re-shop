@@ -12,19 +12,21 @@ import { bindActionCreators } from 'C:/Users/aleks/AppData/Local/Microsoft/TypeS
 
 const BookList = ({ books, addedToCart }) => {
     return (
-        <ul className={s.list}>
-            {
-                books.map(book => {
-                    return <li key={book.id}><BookListItem books={book} addedToCart={() => addedToCart(book.id)} /></li>
-                })}
-        </ul>
+        <div className={s.wrapper}>
+            <ul className={s.list}>
+                {
+                    books.map(book => {
+                        return <li key={book.id}><BookListItem books={book} addedToCart={() => addedToCart(book.id)} /></li>
+                    })}
+            </ul>
+        </div>
     );
 }
 
 class BookListContainer extends Component {
 
     componentDidMount() {
-       
+
         const { bookStoreService, booksLoaded, booksRequested, booksError } = this.props;
         booksRequested();
         bookStoreService.getData()
@@ -37,7 +39,7 @@ class BookListContainer extends Component {
 
     render() {
         const { books, loading, error, addedToCart } = this.props;
-        
+
         if (loading) {
             return <Spinner />
         }

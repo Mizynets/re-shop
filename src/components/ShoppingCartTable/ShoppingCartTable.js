@@ -10,12 +10,13 @@ const ShoppingCartTable = ({ items, total, onAddItem, onDecItem, onTrushItem }) 
     const createTableItem = items.map((item, indx) => {
         const { id, title, count, total } = item;
         return (<tr key={id} className={s.table__tr}>
-            <td>{++indx}</td>
-            <td>{title}</td>
-            <td>{count}</td>
-            <td>${total}</td>
 
-            <td>
+      <td data-label="#">{++indx}</td>
+      <td data-label="Title">{title}</td>
+      <td data-label="Count">{count}</td>
+      <td data-label="Price">${total}</td>
+      
+            <td data-label="Action">
                 <button
                     className={s.btn}
                     onClick={() => onTrushItem(id)}
@@ -38,7 +39,6 @@ const ShoppingCartTable = ({ items, total, onAddItem, onDecItem, onTrushItem }) 
         </tr>);
     });
 
-
     return (
         <div className={s.ShoppingCartTable}>
             <h2>You Order</h2>
@@ -46,7 +46,7 @@ const ShoppingCartTable = ({ items, total, onAddItem, onDecItem, onTrushItem }) 
                 <thead>
                     <tr className={s.table__tr}>
                         <th>#</th>
-                        <th>Item</th>
+                        <th>Title</th>
                         <th>Count</th>
                         <th>Price</th>
                         <th>Action</th>
@@ -54,7 +54,10 @@ const ShoppingCartTable = ({ items, total, onAddItem, onDecItem, onTrushItem }) 
                 </thead>
 
                 <tbody>
-                    {createTableItem}
+                    {createTableItem.length === 0 ? 
+                    <tr className={s.intro}>
+                        <td colspan="5">Please select a book</td>
+                    </tr> : createTableItem}
                 </tbody>
 
             </table>

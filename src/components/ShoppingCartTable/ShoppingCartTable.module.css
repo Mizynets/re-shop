@@ -3,6 +3,17 @@
     padding: 1rem 0;
 }
 
+.intro{
+    text-align: center;
+}
+
+.intro td{
+    font-size: 1.5rem;
+    color: rgb(226, 37, 37);
+    font-weight: 600;
+    text-align: center;
+}
+
 .ShoppingCartTable h3{
     text-align: right;
     padding: 1rem 0;
@@ -64,3 +75,42 @@ tbody tr td{
 .minus{
     color: rgb(241, 209, 24);
 } 
+
+@media screen and (max-width: 800px) {
+    table {
+        border: 0;
+      }
+  
+      table thead {
+        display: none;
+      }
+      tbody tr td{
+        text-align: right;
+        padding: 10px 10px;
+        font-size: 1.1rem
+    }
+      table tr {
+        margin-bottom: 10px;
+        display: block;
+        border-bottom: 2px solid #ddd;
+        text-align: right;
+      }
+  
+      table td {
+        display: block;
+        text-align: right;
+        font-size: 13px;
+        border-bottom: 1px dotted #ccc;
+      }
+  
+      table td:last-child {
+        border-bottom: 0;
+      }
+  
+      table td:before {
+        content: attr(data-label);
+        float: left;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+}

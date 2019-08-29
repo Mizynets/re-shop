@@ -4,7 +4,6 @@ import s from'./BookListitem.module.css';
 const BookListitem = ({ books, addedToCart }) => {
 
     const { title, author, price, bookImg } = books;
-    // console.log(bookImg)
     return (
         <div className={s.item}>
             <div className={s.item__img}>

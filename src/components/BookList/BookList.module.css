@@ -1,3 +1,22 @@
 .list{
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.list li{
+    width: 44%;
+}
+
+.wrapper{
+    overflow: auto;
+    height: 70vh;
+}
+
+@media screen and (max-width: 1070px){
+    .list li{
+        width: 100%;
+    }
 }

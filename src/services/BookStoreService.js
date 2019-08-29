@@ -87,9 +87,9 @@ class BookStoreService {
     getData (){
         return new Promise((resolve, reject) => {
             setTimeout(()=>{
-                if(Math.random() > 0.75 ){
-                    reject(new Error("Something was wrong"))
-                }
+                // if(Math.random() > 0.75 ){
+                //     reject(new Error("Something was wrong"))
+                // }
                 resolve(this.data);
             }, 700);
         });
