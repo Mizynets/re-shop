@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/code-frame": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/generator": "^7.5.5",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
