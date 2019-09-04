@@ -8,7 +8,7 @@ import { booksLoaded, booksRequested, booksError, booksAddToCart } from '../../r
 import Spinner from '../Spinner/Spinner';
 import ErrorIndicator from '../ErrorIndicator';
 
-import { bindActionCreators } from 'C:/Users/aleks/AppData/Local/Microsoft/TypeScript/3.5/node_modules/redux';
+import { bindActionCreators } from 'redux';
 
 const BookList = ({ books, addedToCart }) => {
     return (
