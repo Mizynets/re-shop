@@ -36,6 +36,14 @@ const bookDeleteFromCart = (bookId) => {
         payload: bookId,
     }
 }
+
+const thunkCreaterGetData = (bookStoreService) => () => (dispatch) => {
+        dispatch(booksRequested());
+        bookStoreService.getData() 
+            .then(data => dispatch(booksLoaded(data)))
+            .catch(err=> dispatch(booksError(err)));
+};
+
 export {
     booksLoaded,
     booksRequested,
@@ -43,4 +51,5 @@ export {
     booksAddToCart,
     bookDecFromCart,
     bookDeleteFromCart,
+    thunkCreaterGetData,
 }

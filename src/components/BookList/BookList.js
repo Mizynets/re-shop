@@ -4,11 +4,11 @@ import s from './BookList.module.css';
 import { connect } from 'react-redux';
 import BookListItem from '../BookListItem';
 import WithBookStoreService from '../hoc/WithBookStoreService';
-import { booksLoaded, booksRequested, booksError, booksAddToCart } from '../../reduxStore/actions';
+import { booksAddToCart, thunkCreaterGetData } from '../../reduxStore/actions';
 import Spinner from '../Spinner/Spinner';
 import ErrorIndicator from '../ErrorIndicator';
 
-import { bindActionCreators } from 'C:/Users/aleks/AppData/Local/Microsoft/TypeScript/3.5/node_modules/redux';
+import { bindActionCreators } from 'redux'
 
 const BookList = ({ books, addedToCart }) => {
     return (
@@ -26,15 +26,7 @@ const BookList = ({ books, addedToCart }) => {
 class BookListContainer extends Component {
 
     componentDidMount() {
-
-        const { bookStoreService, booksLoaded, booksRequested, booksError } = this.props;
-        booksRequested();
-        bookStoreService.getData()
-            .then((data) => {
-                booksLoaded(data);
-            })
-            .catch((error) => booksError(error));
-
+        this.props.fetchBooks();
     }
 
     render() {
@@ -60,13 +52,12 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownprops) => {
+
+    const { bookStoreService } = ownprops;
 
     return {
-        booksLoaded: bindActionCreators(booksLoaded, dispatch),
-        booksError: bindActionCreators(booksError, dispatch),
-        booksRequested: bindActionCreators(booksRequested, dispatch),
-
+        fetchBooks: () => dispatch(thunkCreaterGetData(bookStoreService)()), 
         addedToCart: (id) => {
             dispatch(booksAddToCart(id));
         },
