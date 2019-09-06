@@ -8,7 +8,7 @@ import { booksAddToCart, thunkCreaterGetData } from '../../reduxStore/actions';
 import Spinner from '../Spinner/Spinner';
 import ErrorIndicator from '../ErrorIndicator';
 
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
 
 const BookList = ({ books, addedToCart }) => {
     return (
@@ -56,12 +56,10 @@ const mapDispatchToProps = (dispatch, ownprops) => {
 
     const { bookStoreService } = ownprops;
 
-    return {
-        fetchBooks: () => dispatch(thunkCreaterGetData(bookStoreService)()), 
-        addedToCart: (id) => {
-            dispatch(booksAddToCart(id));
-        },
-    }
+    return bindActionCreators({
+        fetchBooks: thunkCreaterGetData(bookStoreService), 
+        addedToCart: booksAddToCart,
+        }, dispatch)
 };
 
 export default WithBookStoreService()(connect(mapStateToProps, mapDispatchToProps)(BookListContainer));
