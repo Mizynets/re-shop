@@ -1,6 +1,6 @@
 import React from 'react';
 import './HomePage.module.css';
-import BookList from '../../BookList';
+import BookList from '../../components/BookList';
 
 const HomePage = () => {
     return (

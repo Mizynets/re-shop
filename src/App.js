@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import HomePage from './components/Pages/HomePage';
-import CartPage from './components/Pages/CartPage';
+import HomePage from './container/HomePage';
+import CartPage from './container/CartPage';
 import Header from './components/Header';
 
 class App extends Component {

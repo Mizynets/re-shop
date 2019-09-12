@@ -17,7 +17,8 @@ const BookList = ({ books, addedToCart }) => {
                 {
                     books.map(book => {
                         return <li key={book.id}><BookListItem books={book} addedToCart={() => addedToCart(book.id)} /></li>
-                    })}
+                    })
+                }
             </ul>
         </div>
     );
